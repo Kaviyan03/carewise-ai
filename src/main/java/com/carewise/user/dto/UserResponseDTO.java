@@ -11,6 +11,8 @@ public class UserResponseDTO {
     private String lastName;
 
     private String email;
+    
+    private String role;
 
     private Integer age;
 
@@ -23,13 +25,14 @@ public class UserResponseDTO {
     }
 
     public UserResponseDTO(Long id, String firstName, String lastName,
-                           String email, Integer age,
+                           String email,String role, Integer age,
                            String gender, LocalDateTime createdAt) {
 
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.role = role;
         this.age = age;
         this.gender = gender;
         this.createdAt = createdAt;
@@ -66,6 +69,14 @@ public class UserResponseDTO {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public String getRole() {
+    		return role;
+    }
+    
+    public void setRole(String role) {
+    		this.role = role;
+    }
 
     public Integer getAge() {
         return age;
@@ -97,6 +108,7 @@ public class UserResponseDTO {
                 ", firstName=" + firstName +
                 ", lastName=" + lastName +
                 ", email=" + email +
+                ", role=" + role+
                 ", age=" + age +
                 ", gender=" + gender +
                 ", createdAt=" + createdAt + "]";

@@ -2,7 +2,7 @@ package com.carewise.user.controller;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
+//import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,17 +22,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    public ResponseEntity<UserResponseDTO> createUser(
-            @Valid @RequestBody UserRequestDTO userRequestDTO) {
-
-        UserResponseDTO createdUser =
-                userService.createUser(userRequestDTO);
-
-        return new ResponseEntity<>(
-                createdUser,
-                HttpStatus.CREATED);
-    }
+//    @PostMapping
+//    public ResponseEntity<UserResponseDTO> createUser(
+//            @Valid @RequestBody UserRequestDTO userRequestDTO) {
+//
+//        UserResponseDTO createdUser =
+//                userService.createUser(userRequestDTO);
+//
+//        return new ResponseEntity<>(
+//                createdUser,
+//                HttpStatus.CREATED);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getUserById(

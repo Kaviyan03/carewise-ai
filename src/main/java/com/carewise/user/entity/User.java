@@ -41,8 +41,11 @@ public class User {
 	private String email;
 	
 	@NotBlank
-	@Size(min = 8, max = 20)
+	@Column(nullable = false)
 	private String password;
+	
+	@Column(nullable = false)
+	private String role;
 	
 	@NotNull
 	@Min(1)
@@ -62,7 +65,7 @@ public class User {
 
 	public User(Long id, String firstName,
 			String lastName, String email,
-			String password, Integer age,
+			String password, String role, Integer age,
 			 String gender) {
 		super();
 		this.id = id;
@@ -70,6 +73,7 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.role = role;
 		this.age = age;
 		this.gender = gender;
 	}
@@ -113,6 +117,14 @@ public class User {
 	public void setPassword(String password) {
 	    this.password = password;
 	}
+	
+	public String getRole() {
+		return role;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public Integer getAge() {
 		return age;
@@ -136,7 +148,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", age="
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", role=" + role + ", age="
 				+ age + ", gender=" + gender + ", createdAt=" + createdAt + "]";
 	}
 	

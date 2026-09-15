@@ -7,7 +7,7 @@ import com.carewise.user.dto.UserResponseDTO;
 
 public interface UserService {
 
-    UserResponseDTO createUser(UserRequestDTO userRequestDTO);
+    //UserResponseDTO createUser(UserRequestDTO userRequestDTO);
 
     UserResponseDTO getUserById(Long id);
 

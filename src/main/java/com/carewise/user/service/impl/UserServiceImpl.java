@@ -3,9 +3,10 @@ package com.carewise.user.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.carewise.exception.DuplicateResourceException;
+//import com.carewise.exception.DuplicateResourceException;
 import com.carewise.exception.ResourceNotFoundException;
 import com.carewise.user.dto.UserRequestDTO;
 import com.carewise.user.dto.UserResponseDTO;
@@ -17,33 +18,39 @@ import com.carewise.user.service.UserService;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
-
-        if (userRepository.existsByEmail(userRequestDTO.getEmail())) {
-            throw new DuplicateResourceException(
-                    "User already exists with email: "
-                            + userRequestDTO.getEmail());
-        }
-
-        User user = new User();
-
-        user.setFirstName(userRequestDTO.getFirstName());
-        user.setLastName(userRequestDTO.getLastName());
-        user.setEmail(userRequestDTO.getEmail());
-        user.setPassword(userRequestDTO.getPassword());
-        user.setAge(userRequestDTO.getAge());
-        user.setGender(userRequestDTO.getGender());
-
-        User savedUser = userRepository.save(user);
-
-        return convertToResponseDTO(savedUser);
-    }
+//    @Override
+//    public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
+//
+//        if (userRepository.existsByEmail(userRequestDTO.getEmail())) {
+//            throw new DuplicateResourceException(
+//                    "User already exists with email: "
+//                            + userRequestDTO.getEmail());
+//        }
+//
+//        User user = new User();
+//
+//        user.setFirstName(userRequestDTO.getFirstName());
+//        user.setLastName(userRequestDTO.getLastName());
+//        user.setEmail(userRequestDTO.getEmail());
+//        user.setPassword(
+//                passwordEncoder.encode(
+//                        userRequestDTO.getPassword()
+//                )
+//        );
+//        user.setAge(userRequestDTO.getAge());
+//        user.setGender(userRequestDTO.getGender());
+//
+//        User savedUser = userRepository.save(user);
+//
+//        return convertToResponseDTO(savedUser);
+//    }
 
     @Override
     public UserResponseDTO getUserById(Long id) {
@@ -77,7 +84,11 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userRequestDTO.getFirstName());
         user.setLastName(userRequestDTO.getLastName());
         user.setEmail(userRequestDTO.getEmail());
-        user.setPassword(userRequestDTO.getPassword());
+        user.setPassword(
+                passwordEncoder.encode(
+                        userRequestDTO.getPassword()
+                )
+        );
         user.setAge(userRequestDTO.getAge());
         user.setGender(userRequestDTO.getGender());
 
